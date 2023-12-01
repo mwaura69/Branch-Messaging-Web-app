@@ -10,7 +10,9 @@ const Auth = ({children}) => {
     
     return (
         <>
-            <div></div>
+            <div>
+                kiss
+            </div>
         </>
     )
 }
