@@ -10,7 +10,7 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-const uri = 'mongodb+srv://vodeya5213:DYg9TvUlCYtZhHoU@bma.ulyjz9a.mongodb.net/'
+const uri = ''
 
 //sign up
 app.post('/user/signup', async(req, res) => {
