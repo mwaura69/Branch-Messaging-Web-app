@@ -85,9 +85,9 @@ app.post('/send/message', async(req, res) => {
 
 //getting meassages posted by diff users
 app.get('/inbox/messages/:id', async(req, res) => {
-    const id = req.params.id
+    const _id = req.params.id
     try {
-        const getMessage = await inbox.find({user: id}).populate('user')
+        const getMessage = await inbox.find({user: _id}).populate('user')
         return res.status(200).json(getMessage)
     } catch(err) {
         return res.status(501).send(`${err}`)
