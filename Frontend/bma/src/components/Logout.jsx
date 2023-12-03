@@ -9,7 +9,7 @@ const Logout = () => {
 
     const loggingOut = () => {
         logout();
-        navigate('/Login');
+        navigate('/');
     }
 
     return (

@@ -1,5 +1,6 @@
 import react from 'react'
 import { Link, } from 'react-router-dom'
+import rct from '../assets/react.svg'
 
 
 const Navbar = () => {
@@ -12,24 +13,34 @@ const Navbar = () => {
             number: 2,
             page:'Login',
         },
-        {
-            number: 3,
-            page:'Dashboard',
-        },
-        {
-            number: 4,
-            page:'Inbox',
-        }
+        // {
+        //     number: 3,
+        //     page:'Dashboard',
+        // },
+        // {
+        //     number: 4,
+        //     page:'Inbox',
+        // }
     ]
     return (
         <>
-            <div>
-                {nav.map(({number, page}) => (
-                    <div key={number}>
-                        <Link to={page}>{page}</Link>
+            <div className="main-navbar">
+                <div className="navbar-logo">
+                    {/* Replace with your logo */}
+                    <Link to="/" className="nav-link-logo">
+                        <img src={rct} alt="Your Logo" />
+                    </Link>
+                </div>
+            <nav className="navbar">
+                {nav.map(({ number, page }) => (
+                    <div key={number} className="nav-item">
+                        <Link to={page} className="nav-link">
+                            {page}
+                        </Link>
                     </div>
                 ))}
-            </div>
+            </nav>
+        </div>
         </>
     )
 }

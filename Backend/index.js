@@ -6,24 +6,30 @@ import dotenv from 'dotenv'
 import jwt from 'jsonwebtoken'
 import { users } from './Database/DbModel/dataModel.js'
 import { inbox } from './Database/DbModel/messageModel.js'
+import axios from 'axios'
+
+
 
 const app = express()
+
 
 app.use(express.json())
 app.use(cors())
 
+//mongo url
 dotenv.config()
 const uri = process.env.MONGODB_URI
 
 
 
 
+
+//generate jwt tokens on the backend
 const generateToken = (id) => {
     return jwt.sign({ id },process.env.JWT_SECRET, {
         expiresIn: '1h'
     })
 }
-
 
 //sign up
 app.post('/user/signup', async(req, res) => {
@@ -37,13 +43,27 @@ app.post('/user/signup', async(req, res) => {
             phoneNumber,
         }
         const createUser = await users.create(details)
+        const secret = createUser.phoneNumber;
+
+        // User signup on Chat Engine
+        const userInChatEngine = await axios.post(
+            'https://api.chatengine.io/users/',
+            {
+                username: name, // Assuming 'name' is the username
+                secret,
+                email,
+            },
+            { headers: { 'Private-Key': '56254df1-68a1-458f-a494-41efe6aa7f6b' } }
+        );
         return res.status(200).json({
             _id: createUser.id,
             name: createUser.name,
             email: createUser.email,
-            token: generateToken(createUser._id)
+            token: generateToken(createUser._id),
+            chatEngineData: userInChatEngine.data,
         })
     } catch(err) {
+        console.error(err);
         return res.status(501).send(`${err}`)
     }
 })
@@ -61,11 +81,19 @@ app.post('/user/login', async(req, res) => {
         if(!checkPassword) {
             return res.status(404).send('Incorrect Password')
         }
+        const r = await axios.get("https://api.chatengine.io/users/me/", {
+            headers: {
+                "Project-ID": "b23fb5a1-6099-4240-acc5-f3eb35eca42e",
+                "User-Name": loginUser.name,
+                "User-Secret": loginUser.phoneNumber,
+            },
+        });
         res.status(200).json({
             _id: loginUser.id,
             name: loginUser.name,
             email: loginUser.email,
-            token: generateToken(loginUser._id)
+            token: generateToken(loginUser._id),
+            chatEngineData: r.data
         });
     } catch (err) {
         return res.status(501).send(`${err}`)
