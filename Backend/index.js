@@ -43,14 +43,13 @@ app.post('/user/signup', async(req, res) => {
             phoneNumber,
         }
         const createUser = await users.create(details)
-        const secret = createUser.phoneNumber;
 
         // User signup on Chat Engine
         const userInChatEngine = await axios.post(
             'https://api.chatengine.io/users/',
             {
                 username: name, // Assuming 'name' is the username
-                secret,
+                secret: name,
                 email,
             },
             { headers: { 'Private-Key': '56254df1-68a1-458f-a494-41efe6aa7f6b' } }
@@ -85,7 +84,7 @@ app.post('/user/login', async(req, res) => {
             headers: {
                 "Project-ID": "b23fb5a1-6099-4240-acc5-f3eb35eca42e",
                 "User-Name": loginUser.name,
-                "User-Secret": loginUser.phoneNumber,
+                "User-Secret": loginUser.name,
             },
         });
         res.status(200).json({

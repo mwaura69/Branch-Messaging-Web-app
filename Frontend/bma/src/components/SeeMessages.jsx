@@ -11,22 +11,22 @@ const SeeMessages = () => {
     const receivedMessages = useCallback(async () => {
         try {
             const response = await axios.get(`http://localhost:4001/inbox/messages/${_id}`);
-            setChats(response.data);
+            setChats(response.data.mail);
             console.log(response.data);
         } catch (error) {
             console.error(error);
         }
     }, [_id]);
 
-    // useEffect(() => {
-    //     receivedMessages();
-    // }, [receivedMessages]);
+    useEffect(() => {
+        receivedMessages();
+    }, [receivedMessages]);
 
 
     return (
         <>
             <div>
-                <p>hi below <button onClick={receivedMessages}>get messages</button></p>
+                <p>{chats}</p>
             </div>
         </>
     )

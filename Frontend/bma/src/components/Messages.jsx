@@ -1,7 +1,7 @@
 import react, { useState } from 'react'
 import axios from 'axios'
 import { useAuth } from '../routes/AuthContext';
-
+import SeeMessages from './SeeMessages'
 
 
 const Messages = () => {
@@ -20,11 +20,16 @@ const Messages = () => {
 
     return (
         <>
-            <div>
-                <label>Message: <input value={mail} type='text' onChange={(e) => setMail(e.target.value)}  /></label>
-            </div>
-            <div>
-                <button onClick={sendMessage}>Send</button>
+            <div className="chat-container">
+                <div className="chat-messages">
+                    <SeeMessages />
+                </div>
+                <div className="chat-input">
+                    <label>
+                    Message: <input value={mail} type="text" onChange={(e) => setMail(e.target.value)} />
+                    </label>
+                    <button onClick={sendMessage}>Send</button>
+                </div>
             </div>
         </>
     )

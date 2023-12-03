@@ -13,14 +13,6 @@ const Navbar = () => {
             number: 2,
             page:'Login',
         },
-        // {
-        //     number: 3,
-        //     page:'Dashboard',
-        // },
-        // {
-        //     number: 4,
-        //     page:'Inbox',
-        // }
     ]
     return (
         <>
