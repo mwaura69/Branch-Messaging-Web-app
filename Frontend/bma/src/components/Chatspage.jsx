@@ -4,7 +4,7 @@ import { useAuth } from '../routes/AuthContext';
 import axios from 'axios';
 
 const ChatsPage = () => {
-  const [messages, setMessages] = useState([]);
+  // const [messages, setMessages] = useState([]);
   const { userName, userId } = useAuth();
   const name = userName;
   const _id = userId;
@@ -25,10 +25,9 @@ const ChatsPage = () => {
       // Handle incoming messages from the WebSocket
       const message = JSON.parse(event.data);
       const mail = message.data.last_message.text;
-      console.log('Received message:', mail);
 
       // Update state with the new message
-      setMessages((prevMessages) => [...prevMessages, { text: mail, sender: message.sender.username }]);
+      // setMessages((prevMessages) => [...prevMessages, { text: mail, sender: message.sender.name }]);
     };
 
     socket.onclose = (event) => {
@@ -49,15 +48,14 @@ const ChatsPage = () => {
     try {
       const response = await axios.get(`http://localhost:4001/inbox/messages/${_id}`);
       setMessages(response.data);
-      console.log(response.data);
     } catch (error) {
       console.error(error);
     }
   }, [_id]);
 
-  useEffect(() => {
-    receivedMessages();
-  }, [receivedMessages]);
+  // useEffect(() => {
+  //   receivedMessages();
+  // }, [receivedMessages]);
 
   return (
     <div style={{ height: '100vh', width: '150vh' }}>
@@ -66,8 +64,8 @@ const ChatsPage = () => {
         username={name} // Replace with the actual username
         secret={name} // Replace with the actual secret
         style={{ height: '100%', width: '100%' }}
-        onNewMessage={() => receivedMessages()} // Update messages on new message
-        messages={messages.map((message) => ({ text: message.mail, sender: message.user.username }))}
+        // onNewMessage={() => receivedMessages()} // Update messages on new message
+        // messages={messages.map((message) => ({ text: message.mail, sender: message.user.username }))}
       />
     </div>
   );

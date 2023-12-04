@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, } from 'react-router-dom'
 import Logout from './Logout'
-
+import logo from '../assets/chats.png'
 
 
 
@@ -28,7 +28,7 @@ const Sidebar = () => {
                 <div className="sidebar-logo">
                     {/* Replace with your logo */}
                     <Link to="/">
-                        <img alt="Logo" src="your-logo-path" />
+                        <img alt="Logo" src={logo} />
                     </Link>
                 </div>
                 <nav className="sidebar-nav">

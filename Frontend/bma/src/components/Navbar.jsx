@@ -1,6 +1,6 @@
 import react from 'react'
 import { Link, } from 'react-router-dom'
-import rct from '../assets/react.svg'
+import rct from '../assets/chat.png'
 
 
 const Navbar = () => {

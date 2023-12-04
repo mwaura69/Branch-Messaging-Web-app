@@ -1,6 +1,6 @@
 import asyncHandler from 'express-async-handler'
 import jwt from 'jsonwebtoken'
-import {users} from '../Database/Dbmodel/dataModel.js'
+import {users} from '../Database/DbModel/dataModel.js'
 
 
 const protectRoute = asyncHandler(async(req, res, next) => {

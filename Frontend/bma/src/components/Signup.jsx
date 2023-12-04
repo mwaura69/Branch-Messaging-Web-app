@@ -22,7 +22,6 @@ const Signup = () => {
             if (response.status === 200) {
                 navigate('/Login');
                 setInputs(response.data);
-                console.log(response.data);
             } else {
                 navigate('/');
             }
