@@ -1,6 +1,6 @@
-# GraphQl MERN Stack
+# Branch-Messaging-Web-app
 
-This is a MERN stack using graphql as the 
+
 ## Table of Contents
 
 - [Getting Started](#getting-started)
